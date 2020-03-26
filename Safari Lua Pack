@@ -32,7 +32,7 @@ P.S. I used other luas as well not everything is made by me :/
 ---------------------------------------------------------------
 --]]
 
-local VERSION_NUMBER = ' 1.1.4';
+local VERSION_NUMBER = ' 1.0.0';
 local VERSION_CHECK_DONE = false;
 local UPDATE_DOWNLOADED = false;
 local isBeta = false;
@@ -45,7 +45,7 @@ local Updater_GP = gui.Groupbox(SAFARI_PACK_UPDATE_TAB, "Updater", 16, 80, 250, 
 local Changelog_GP = gui.Groupbox(SAFARI_PACK_UPDATE_TAB, "Changelog", 276, 80, 340, 600)
 
 
-local clientVersion = "1.1.4"
+local clientVersion = "1.0.0"
 local latestVersion = http.Get("https://raw.githubusercontent.com/Safari1Lua/Safari1Lua/master/Version")
 --local changelog = http.get("https://raw.githubusercontent.com/Safari1Lua/Safari1Lua/master/Changelog")
 local txt = gui.Text(Changelog_GP, "Nothing to see here")
@@ -63,8 +63,7 @@ local function Update()
 	end
 end
 
-
-local clientverision_txt = gui.Text(Updater_GP, "Client Version: "..clilentVersion)
+local clientverision_txt = gui.Text(Updater_GP, "Client Version: "..clientVersion)
 local latestversion_txt = gui.Text(Updater_GP, "Latest Version: "..latestVersion)
 local update_button = gui.Button(Updater_GP, "Update", Update)
 --local Changelog_txt = gui.Text(Changelog_GP, http.get("https://raw.githubusercontent.com/Safari1Lua/Safari1Lua/master/Changelog)
