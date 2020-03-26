@@ -32,7 +32,7 @@ P.S. I used other luas as well not everything is made by me :/
 ---------------------------------------------------------------
 --]]
 
-local VERSION_NUMBER = ' 1.1.3';
+local VERSION_NUMBER = ' 1.1.4';
 local VERSION_CHECK_DONE = false;
 local UPDATE_DOWNLOADED = false;
 local isBeta = false;
@@ -40,18 +40,30 @@ local isBeta = false;
 --- Auto Updater
 local SAFARI_PACK_UPDATE_TAB = gui.Tab(gui.Reference("Settings") , "SAFARI.PACK.UPDATER", "Safari Pack Updater")
 local SAFARI_PACK_GP = gui.Groupbox(SAFARI_PACK_UPDATE_TAB, "Updater for Safari's Lua Pack | Version" ..VERSION_NUMBER, 16, 16, 600,600)
-local SAFARI_UPDATER_TEXT = gui.Text(SAFARI_PACK_UPDATE_TAB, " ")
 
-local clientVersion = "1.1.3"
-local latestVersion = http.Get("https://raw.githubusercontent.com/GhostZ-AW/GhostZLuaPack/master/version.txt")
+local Updater_GP = gui.Groupbox(SAFARI_PACK_UPDATE_TAB, "Updater", 16, 80, 250, 600)
+local Changlog_GP = gui.Groupbox(SAFARI_PACK_UPDATE_TAB, "Changelog", 276, 80, 340, 600)
+
+
+local clientVersion = "1.1.4"
+local latestVersion = http.Get("https://raw.githubusercontent.com/Safari1Lua/Safari1Lua/master/Version")
+--local changelog = http.get("https://raw.githubusercontent.com/Safari1Lua/Safari1Lua/master/Changelog")
+
+
 local function Update()
     if clientVersion ~= latestVersion then
         currentScript = file.Open(GetScriptName(), "w")
-        currentScript:Write(http.Get("https://raw.githubusercontent.com/GhostZ-AW/GhostZLuaPack/master/GhostZLuaPack.lua"))
+        currentScript:Write(http.Get("https://raw.githubusercontent.com/Safari1Lua/Safari1Lua/master/Safari%20Lua%20Pack"))
         currentScript:Close()
         LoadScript(GetScriptName())
     end
 end
+
+
+local clientverision_txt = gui.Text(Updater_GP, "Client Version: "..clientVersion)
+local latestversion_txt = gui.Text(Updater_GP, "Latest Version: "..latestVersion)
+local update_button = gui.Button(Updater_GP, "Update", Update)
+--local Changelog_txt = gui.Text(Changelog_GP, ""..changelog)
 
 
 --LoadScript('Safari AA.lua')
