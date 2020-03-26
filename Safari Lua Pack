@@ -45,7 +45,7 @@ local Updater_GP = gui.Groupbox(SAFARI_PACK_UPDATE_TAB, "Updater", 16, 80, 250, 
 local Changelog_GP = gui.Groupbox(SAFARI_PACK_UPDATE_TAB, "Changelog", 276, 80, 340, 600)
 
 
-local clientVersion = "1.1.3"
+local clientVersion = "1.1.4"
 local latestVersion = http.Get("https://raw.githubusercontent.com/Safari1Lua/Safari1Lua/master/Version")
 --local changelog = http.get("https://raw.githubusercontent.com/Safari1Lua/Safari1Lua/master/Changelog")
 local txt = gui.Text(Changelog_GP, "Nothing to see here")
@@ -53,7 +53,10 @@ local txt = gui.Text(Changelog_GP, "Nothing to see here")
 
 local function Update()
     if clientVersion ~= latestVersion then       
-	 currentScript:Write(http.Get("https://raw.githubusercontent.com/Safari1Lua/Safari1Lua/master/Safari%20Lua%20Pack"))
+	currentScript = file.Open(GetScriptName(), "w")
+        currentScript:Write(http.Get("https://raw.githubusercontent.com/GhostZ-AW/GhostZLuaPack/master/GhostZLuaPack.lua"))
+        currentScript:Close()
+        LoadScript(GetScriptName())
 	 local text_Update = gui.Text(Changelog_GP, "Reload for update") 
 	elseif clientVersion == latestVersion then
 	 local text_UpToDate = gui.Text(Changelog_GP, "Latest Version Already Installed")
