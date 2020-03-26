@@ -54,7 +54,7 @@ local txt = gui.Text(Changelog_GP, "Nothing to see here")
 local function Update()
     if clientVersion ~= latestVersion then       
 	currentScript = file.Open(GetScriptName(), "w")
-        currentScript:Write(http.Get("https://raw.githubusercontent.com/GhostZ-AW/GhostZLuaPack/master/GhostZLuaPack.lua"))
+        currentScript:Write(http.Get("https://raw.githubusercontent.com/Safari1Lua/Safari1Lua/master/SafariLuaPack.lua"))
         currentScript:Close()
         LoadScript(GetScriptName())
 	 local text_Update = gui.Text(Changelog_GP, "Reload for update") 
