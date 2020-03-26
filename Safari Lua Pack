@@ -42,28 +42,29 @@ local SAFARI_PACK_UPDATE_TAB = gui.Tab(gui.Reference("Settings") , "SAFARI.PACK.
 local SAFARI_PACK_GP = gui.Groupbox(SAFARI_PACK_UPDATE_TAB, "Updater for Safari's Lua Pack | Version" ..VERSION_NUMBER, 16, 16, 600,600)
 
 local Updater_GP = gui.Groupbox(SAFARI_PACK_UPDATE_TAB, "Updater", 16, 80, 250, 600)
-local Changlog_GP = gui.Groupbox(SAFARI_PACK_UPDATE_TAB, "Changelog", 276, 80, 340, 600)
+local Changelog_GP = gui.Groupbox(SAFARI_PACK_UPDATE_TAB, "Changelog", 276, 80, 340, 600)
 
 
 local clientVersion = "1.1.4"
 local latestVersion = http.Get("https://raw.githubusercontent.com/Safari1Lua/Safari1Lua/master/Version")
 --local changelog = http.get("https://raw.githubusercontent.com/Safari1Lua/Safari1Lua/master/Changelog")
+local txt = gui.Text(Changelog_GP, "Nothing to see here")
 
 
 local function Update()
-    if clientVersion ~= latestVersion then
-        currentScript = file.Open(GetScriptName(), "w")
-        currentScript:Write(http.Get("https://raw.githubusercontent.com/Safari1Lua/Safari1Lua/master/Safari%20Lua%20Pack"))
-        currentScript:Close()
-        LoadScript(GetScriptName())
-    end
+    if clientVersion ~= latestVersion then       
+	 currentScript:Write(http.Get("https://raw.githubusercontent.com/Safari1Lua/Safari1Lua/master/Safari%20Lua%20Pack"))
+	 txt:SetValue(Changelog_GP"Reload script for Update")
+	elseif clientVersion == latestVersion then
+	 txt:SetValue(Changelog_GP, "Latest version of the script has already been installed")
+   end
 end
 
 
 local clientverision_txt = gui.Text(Updater_GP, "Client Version: "..clientVersion)
 local latestversion_txt = gui.Text(Updater_GP, "Latest Version: "..latestVersion)
 local update_button = gui.Button(Updater_GP, "Update", Update)
---local Changelog_txt = gui.Text(Changelog_GP, ""..changelog)
+--local Changelog_txt = gui.Text(Changelog_GP, http.get("https://raw.githubusercontent.com/Safari1Lua/Safari1Lua/master/Changelog)
 
 
 --LoadScript('Safari AA.lua')
@@ -349,21 +350,24 @@ end
 
 local DT_TAB = gui.Tab(gui.Reference("Misc"), "DoubleTap", "Double Tap")
 local DT_GB = gui.Groupbox(DT_TAB, "Safari's Double Tap", 16, 16, 600,600)
+local dtCheckbox = gui.Checkbox(DT_GB, "Double Tab Active", false)
+--if dtCheckbox:GetValue() then 
 local DT_ST = gui.Combobox(DT_GB, "dt.set", "DT Key Setting", "Off" , "Shift", "Rapidfire")
 local DT_OFF = gui.Combobox(DT_GB, "dt.set2", "DT OFF", "Off", "Shift")
 local DT_BINDKEY = gui.Keybox(DT_GB, "dt.bind", "Double Tap Key", 0)
 local DT_BUTTON = gui.GetValue("misc.DoubleTap.dt.bind")
+
 local function DTBIND_SWITCH()
 	local DT_BUTTON = gui.GetValue("misc.DoubleTap.dt.bind")
-	local DT_ST = gui.GetValue("misc.DoubleTap.dt.set")
- 	local DT_OFF = gui.GetValue("misc.DoubleTap.dt.set2")
+		local DT_ST = gui.GetValue("misc.DoubleTap.dt.set")
+		local DT_OFF = gui.GetValue("misc.DoubleTap.dt.set2")
 		if input.IsButtonDown(DT_BUTTON) then
 			gui.SetValue("rbot.accuracy.weapon.asniper.doublefire", DT_ST)
 		else
 			gui.SetValue("rbot.accuracy.weapon.asniper.doublefire", DT_OFF)
-	end
+		end
 end
-
+--end
 -- Visuals --
 	--\\ Screen Animations
 function Effect( Event )
